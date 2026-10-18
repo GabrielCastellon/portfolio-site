@@ -1,7 +1,7 @@
 ---
 role: LLM / Machine Learning Developer (Co-op)
 organization: Factors Education
-period: April 2024 – September 2024
+period: May 2024 – August 2024
 category: Work
 order: 1
 draft: false
