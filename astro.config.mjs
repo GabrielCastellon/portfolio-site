@@ -15,6 +15,7 @@ const site = env.SITE_URL || (env.VERCEL_PROJECT_PRODUCTION_URL
 export default defineConfig({
   site,
   output: 'static',
+  devToolbar: { enabled: false },
   compressHTML: true,
   integrations: [mdx(), ...(site ? [sitemap()] : []), react()],
 

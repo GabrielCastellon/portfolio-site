@@ -8,10 +8,10 @@ const projects = (await getCollection('projects', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Panel id="projects" labelledby="projects-heading">
+<Panel id="projects" labelledby="projects-heading" class="h-full">
   <SectionHeading title="Projects" id="projects-heading" number="03" />
   {projects.length > 0 ? (
-    <div class="divide-y divide-line px-6 sm:px-8">
+    <div class="space-y-5 px-6 py-7 sm:px-8">
       {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
     </div>
   ) : (

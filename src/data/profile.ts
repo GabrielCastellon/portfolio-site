@@ -25,7 +25,7 @@ export const profile = {
   ],
   contact: {
     invitation:
-      'I’m always open to new opportunities, collaborations, conversations, or cat photos! Feel free to reach out.',
+      'I’m always open to new opportunities, collaborations, and conversations. Feel free to reach out.',
     email: 'gabriel.castellon@mail.utoronto.ca',
     github: 'https://github.com/GabrielCastellon',
     linkedin: 'https://www.linkedin.com/in/gabrielcastellon',
@@ -43,13 +43,14 @@ export const navigation = [
 export const skills = [
   {
     category: 'Languages',
-    items: ['Python', 'Java', 'JavaScript', 'TypeScript', 'HTML & CSS', 'R'],
+    items: ['Python', 'Java', 'JavaScript', 'TypeScript', 'HTML/CSS', 'R', 'SQL', 'LaTeX', 'Kotlin'],
   },
   {
     category: 'Development',
     items: [
-      'Web Design', 'Front-End Development', 'Data Structures & Algorithms',
-      'Object-Oriented Programming', 'Git', 'GitHub Pages', 'Node.js',
+      'Git', 'Node.js',
+      'React', 'Next.js', 'jQuery', 'MongoDB', 'Android Studio',
+      'IntelliJ', 'Eclipse', 'Babel',
     ],
   },
   {
@@ -57,13 +58,14 @@ export const skills = [
     items: [
       'Machine Learning', 'Deep Learning', 'Computer Vision',
       'Neural Networks', 'Research', 'Benchmarking',
+      'TensorFlow', 'PyTorch', 'Scikit-learn',
     ],
   },
   {
     category: 'Cloud & Tools',
     items: [
-      'AWS', 'Google Cloud Platform',
-      'SharePoint', 'Power Automate', 'PowerPoint',
+      'AWS', 'Google Cloud Platform', 'PowerPoint',
+      'Firebase', 'Azure', 'MATLAB', 'Linux', 'Microsoft Suite',
     ],
   },
   {
@@ -75,9 +77,6 @@ export const skills = [
   },
   {
     category: 'Additional Interests & Skills',
-    items: [
-      'Communication', 'Problem Solving', 'Debugging',
-      'Accessibility', 'Graphic Design',
-    ],
+    items: ['Communication', 'Problem Solving', 'Debugging', 'Accessibility'],
   },
 ];

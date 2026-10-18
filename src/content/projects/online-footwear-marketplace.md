@@ -1,5 +1,5 @@
 ---
-title: Online Footwear Marketplace
+title: Shoe Marketplace
 category: Full-Stack Web Application
 description: An online marketplace where users can create shops and list footwear for sale.
 technologies: [MongoDB, Express.js, React, Node.js]

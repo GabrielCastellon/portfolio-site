@@ -11,14 +11,14 @@ const experiences = await Promise.all(entries.map(async (entry) => ({
 })));
 ---
 
-<Panel id="experience" labelledby="experience-heading">
+<Panel id="experience" labelledby="experience-heading" class="h-full">
   <SectionHeading title="Work Experience" id="experience-heading" number="02" />
   {experiences.length > 0 ? (
     <ol class="space-y-5 px-6 py-7 sm:px-8">
       {experiences.map(({ data, Content }) => (
         <li class="relative border-l border-accent/20 pl-5 before:absolute before:top-5 before:-left-[3px] before:size-[5px] before:rounded-full before:bg-accent before:shadow-[0_0_10px_#c8d3e150]">
           <details class="group rounded-xl border border-line bg-obsidian/40 open:border-primary-hover hover:border-primary-hover focus-within:border-accent motion-safe:transition-colors motion-safe:duration-200">
-            <summary class="cursor-pointer list-none px-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+            <summary class="flex min-h-36 cursor-pointer list-none flex-col justify-center px-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
               <span class="mb-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-muted">
                 <span class="text-accent">{data.category}</span>
                 <span>{data.period}</span>
