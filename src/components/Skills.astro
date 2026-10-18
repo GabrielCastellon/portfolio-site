@@ -1,0 +1,33 @@
+---
+import { skills } from '../data/profile';
+import SectionHeading from './SectionHeading.astro';
+import Panel from './Panel.astro';
+
+const tones = [
+  { border: 'border-accent/15', text: 'text-accent' },
+  { border: 'border-silver/15', text: 'text-silver' },
+];
+const categorySymbols: Record<string, string> = {
+  Languages: '</>',
+  Development: '{ }',
+  'Machine Learning & AI': '(o_o)',
+  'Cloud & Tools': '(~)',
+  Leadership: 'o-o',
+  'Additional Interests & Skills': '(^_^)',
+};
+---
+
+<Panel id="skills" labelledby="skills-heading">
+  <SectionHeading title="Skills & interests" id="skills-heading" number="04" />
+  <div class="grid gap-4 px-6 py-7 sm:grid-cols-2 sm:px-8 lg:grid-cols-3">
+    {skills.map(({ category, items }, index) => (
+      <div class:list={['group min-w-0 rounded-xl border bg-obsidian/35 p-5 hover:border-accent/45 hover:bg-primary/20 motion-safe:transition-[border-color,background-color,translate] motion-safe:duration-300 motion-safe:hover:-translate-y-1', tones[index % tones.length].border]}>
+        <span aria-hidden="true" class="mb-5 inline-flex h-9 min-w-10 items-center justify-center rounded-lg border border-accent/15 bg-primary/15 px-2 font-mono text-xs text-accent">{categorySymbols[category] ?? ':)'}</span>
+        <h3 class:list={['mb-4 text-sm leading-relaxed font-bold', tones[index % tones.length].text]}>{category}</h3>
+        <ul class="flex flex-wrap gap-2 text-xs leading-relaxed text-ivory">
+          {items.map((skill) => <li class="rounded-md border border-line bg-surface/70 px-2.5 py-1.5">{skill}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Panel>

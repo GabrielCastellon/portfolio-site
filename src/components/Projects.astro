@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+import SectionHeading from './SectionHeading.astro';
+import Panel from './Panel.astro';
+
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Panel id="projects" labelledby="projects-heading">
+  <SectionHeading title="Projects" id="projects-heading" number="03" />
+  {projects.length > 0 ? (
+    <div class="divide-y divide-line px-6 sm:px-8">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  ) : (
+    <div class="px-6 py-7 sm:px-8">
+      <div aria-hidden="true" class="relative mb-7 flex h-36 items-center justify-center overflow-hidden rounded-xl border border-accent/10 bg-[radial-gradient(ellipse_at_center,#6b9cd021,transparent_70%)]">
+        <div class="absolute h-20 w-48 -rotate-25 rounded-[50%] border border-accent/20"></div>
+        <div class="absolute h-20 w-48 rotate-25 rounded-[50%] border border-accent/10"></div>
+        <span class="font-mono text-3xl text-silver">&lt;/&gt;</span>
+        <span class="absolute top-8 right-14 size-1 rounded-full bg-accent shadow-[0_0_14px_#c8d3e1]"></span>
+      </div>
+      <p class="text-base text-ivory">Project notes coming soon.</p>
+      <p class="mt-3 max-w-lg text-sm leading-relaxed text-muted">A place for the things I build, from AI experiments to games, websites, and apps. I’ll share projects here as they’re ready.</p>
+    </div>
+  )}
+</Panel>

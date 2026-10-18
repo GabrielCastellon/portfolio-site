@@ -1,0 +1,16 @@
+---
+interface Props {
+  id?: string;
+  labelledby: string;
+  class?: string;
+}
+const { id, labelledby, class: className } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  class:list={['relative isolate min-w-0 overflow-hidden rounded-2xl border border-line bg-[linear-gradient(135deg,#1b304ca6,#0e1a2cf2_55%,#0b1525f2)] shadow-[inset_0_1px_0_#ffffff06,0_16px_48px_-28px_#00000080] hover:border-primary-hover focus-within:border-primary-hover motion-safe:transition-[border-color,box-shadow] motion-safe:duration-300 motion-safe:hover:shadow-[inset_0_1px_0_#ffffff0a,0_18px_60px_-28px_#000000a0] motion-safe:supports-[animation-timeline:view()]:animate-reveal motion-safe:supports-[animation-timeline:view()]:[animation-timeline:view()] motion-safe:supports-[animation-timeline:view()]:[animation-range:entry_0%_entry_100%]', className]}
+>
+  <slot />
+</section>

@@ -1,0 +1,44 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index: number;
+}
+const { project, index } = Astro.props;
+const { title, category, description, technologies, github, demo } = project.data;
+const { Content } = await render(project);
+---
+
+<article class="py-7">
+  <details class="group rounded-xl border border-line bg-obsidian/40 open:border-primary-hover hover:border-primary-hover focus-within:border-accent motion-safe:transition-colors motion-safe:duration-200">
+    <summary class="cursor-pointer list-none p-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+      <span class="mb-4 flex flex-wrap items-center gap-3 font-mono text-[10px] leading-relaxed tracking-wide text-accent uppercase">
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')} /</span>
+        {category && <span>{category}</span>}
+      </span>
+      <h3 class="flex items-center justify-between gap-4 text-xl leading-snug font-bold tracking-tight">
+        <span>{title}</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-4 shrink-0 text-accent group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-200"><path d="m6 9 6 6 6-6" /></svg>
+      </h3>
+      <span class="mt-3 block text-xs text-muted group-open:hidden">View project details</span>
+    </summary>
+    <div class="px-5 pb-5 motion-safe:group-open:animate-enter">
+  <p class="mt-3 text-sm leading-relaxed text-muted">{description}</p>
+  {technologies.length > 0 && (
+    <ul aria-label="Technologies used" class="mt-5 flex flex-wrap gap-2 font-mono text-[11px] leading-relaxed text-accent">
+      {technologies.map((technology) => <li class="rounded-md border border-accent/20 bg-primary/20 px-2.5 py-1.5">{technology}</li>)}
+    </ul>
+  )}
+  <div class="mt-6 border-t border-line pt-5 text-sm leading-relaxed text-muted [&_a]:text-accent [&_a]:underline [&_ul]:list-disc [&_ul]:space-y-3 [&_ul]:pl-4">
+    <Content />
+  </div>
+  {(github || demo) && (
+    <div class="mt-4 flex flex-wrap gap-6 text-sm">
+      {github && <a href={github} aria-label={`${title} source on GitHub`} class="inline-flex min-h-11 items-center gap-2 text-accent underline decoration-line underline-offset-4 transition-colors hover:text-ivory hover:decoration-accent motion-reduce:transition-none">GitHub <span aria-hidden="true">↗</span></a>}
+      {demo && <a href={demo} aria-label={`${title} live demo`} class="inline-flex min-h-11 items-center gap-2 text-accent underline decoration-line underline-offset-4 transition-colors hover:text-ivory hover:decoration-accent motion-reduce:transition-none">Live demo <span aria-hidden="true">↗</span></a>}
+    </div>
+  )}
+    </div>
+  </details>
+</article>

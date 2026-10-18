@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import SectionHeading from './SectionHeading.astro';
+import Panel from './Panel.astro';
+
+const entries = (await getCollection('experience', ({ data }) => !data.draft && data.category === 'Work'))
+  .sort((a, b) => a.data.order - b.data.order);
+const experiences = await Promise.all(entries.map(async (entry) => ({
+  ...entry,
+  ...await render(entry),
+})));
+---
+
+<Panel id="experience" labelledby="experience-heading">
+  <SectionHeading title="Work Experience" id="experience-heading" number="02" />
+  {experiences.length > 0 ? (
+    <ol class="space-y-5 px-6 py-7 sm:px-8">
+      {experiences.map(({ data, Content }) => (
+        <li class="relative border-l border-accent/20 pl-5 before:absolute before:top-5 before:-left-[3px] before:size-[5px] before:rounded-full before:bg-accent before:shadow-[0_0_10px_#c8d3e150]">
+          <details class="group rounded-xl border border-line bg-obsidian/40 open:border-primary-hover hover:border-primary-hover focus-within:border-accent motion-safe:transition-colors motion-safe:duration-200">
+            <summary class="cursor-pointer list-none px-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+              <span class="mb-3 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] text-muted">
+                <span class="text-accent">{data.category}</span>
+                <span>{data.period}</span>
+              </span>
+              <span class="flex items-center justify-between gap-4">
+                <span class="text-lg leading-snug text-ivory">{data.role}</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-4 shrink-0 text-accent group-open:rotate-180 motion-safe:transition-transform motion-safe:duration-200"><path d="m6 9 6 6 6-6" /></svg>
+              </span>
+              <span class="mt-1 block text-sm leading-relaxed text-muted">{data.organization}</span>
+            </summary>
+            <div class="mx-4 border-t border-line py-4 text-sm leading-relaxed text-muted motion-safe:group-open:animate-enter [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
+              <Content />
+            </div>
+          </details>
+        </li>
+      ))}
+    </ol>
+  ) : <p class="px-5 py-6 text-sm text-muted sm:px-6">Experience notes will be shared here.</p>}
+</Panel>

@@ -2,19 +2,30 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const blog = defineCollection({
-	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
-	// Type-check frontmatter using a schema
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// Transform string to Date object
-			pubDate: z.coerce.date(),
-			updatedDate: z.coerce.date().optional(),
-			heroImage: z.optional(image()),
-		}),
+const projects = defineCollection({
+  loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    title: z.string(),
+    category: z.string().optional(),
+    description: z.string(),
+    technologies: z.array(z.string()).default([]),
+    github: z.url({ protocol: /^https$/ }).optional(),
+    demo: z.url({ protocol: /^https$/ }).optional(),
+    order: z.number().default(0),
+    draft: z.boolean().default(true),
+  }),
 });
 
-export const collections = { blog };
+const experience = defineCollection({
+  loader: glob({ base: './src/content/experience', pattern: '**/*.{md,mdx}' }),
+  schema: z.object({
+    role: z.string(),
+    organization: z.string(),
+    period: z.string(),
+    category: z.string(),
+    order: z.number().default(0),
+    draft: z.boolean().default(true),
+  }),
+});
+
+export const collections = { projects, experience };

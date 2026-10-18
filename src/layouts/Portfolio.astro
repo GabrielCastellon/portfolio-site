@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-pt-24 motion-safe:scroll-smooth">
+  <head>
+    <BaseHead title={title} description={description} noindex={noindex} />
+  </head>
+  <body class="bg-obsidian font-sans text-ivory antialiased selection:bg-primary selection:text-ivory [&_a]:focus-visible:outline-2 [&_a]:focus-visible:outline-offset-4 [&_a]:focus-visible:outline-accent">
+    <a href="#main" class="fixed top-4 left-4 z-100 -translate-y-40 bg-ivory px-5 py-3 text-obsidian focus:translate-y-0">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1" class="focus:outline-none">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

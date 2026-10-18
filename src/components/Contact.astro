@@ -1,0 +1,38 @@
+---
+import { profile } from '../data/profile';
+import SectionHeading from './SectionHeading.astro';
+import Panel from './Panel.astro';
+
+const { email, github, linkedin, invitation } = profile.contact;
+function httpsLink(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.href : undefined;
+  } catch {
+    return undefined;
+  }
+}
+const links = [
+  { label: 'Email', href: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? `mailto:${email}` : undefined },
+  { label: 'GitHub', href: httpsLink(github) },
+  { label: 'LinkedIn', href: httpsLink(linkedin) },
+].filter(({ href }) => href);
+const hasContact = links.length > 0;
+---
+
+<Panel id="contact" labelledby="contact-heading" class="bg-[radial-gradient(ellipse_at_100%_0%,#386eab30,transparent_65%)]">
+  <SectionHeading title="Let’s connect" id="contact-heading" number="05" />
+  <div class="grid gap-8 px-6 py-8 sm:px-8 md:grid-cols-[1.2fr_1fr] md:items-center md:gap-12">
+    <p class="max-w-lg text-lg leading-relaxed text-muted">{invitation}</p>
+    {!hasContact && <p class="mt-3 text-xs leading-relaxed text-muted">Contact details will be available here soon.</p>}
+    <ul class="space-y-3">
+      {links.map(({ label, href }) => (
+        <li>
+          <a href={href} class="group flex min-h-16 items-center justify-between gap-4 rounded-xl border border-accent/20 bg-obsidian/40 px-5 py-4 text-base text-accent hover:border-accent/60 hover:bg-primary/25 hover:text-ivory motion-safe:transition-[border-color,background-color,translate] motion-safe:duration-200 motion-safe:hover:-translate-y-0.5">
+            {label}<span aria-hidden="true" class="text-xl motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-hover:-translate-y-1">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Panel>

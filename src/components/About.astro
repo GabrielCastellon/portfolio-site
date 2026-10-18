@@ -1,0 +1,13 @@
+---
+import { profile } from '../data/profile';
+import SectionHeading from './SectionHeading.astro';
+import Panel from './Panel.astro';
+---
+
+<Panel id="about" labelledby="about-heading">
+  <SectionHeading title="Home" id="about-heading" number="01" />
+  <div class="space-y-5 px-6 py-7 text-[15px] leading-relaxed text-muted sm:px-8">
+    {profile.about.map((paragraph, index) => <p class:list={[index === 0 && 'text-lg leading-relaxed text-ivory']}>{paragraph}</p>)}
+    <p class="border-t border-line pt-5 text-sm text-accent">Thank you for visiting! :)</p>
+  </div>
+</Panel>

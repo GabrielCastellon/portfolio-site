@@ -1,0 +1,14 @@
+---
+import { profile } from '../data/profile';
+import Panel from './Panel.astro';
+import SectionHeading from './SectionHeading.astro';
+---
+
+<aside aria-label="A bit more about Gabriel" class="min-w-0">
+  <Panel labelledby="fun-facts">
+    <SectionHeading title="Fun facts" id="fun-facts" />
+    <div class="space-y-4 px-6 py-7 text-sm leading-relaxed text-ivory sm:px-8">
+      {profile.funFacts.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </Panel>
+</aside>

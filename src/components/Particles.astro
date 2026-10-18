@@ -1,0 +1,24 @@
+---
+interface Props {
+  variant: 'hero' | 'content';
+}
+const { variant } = Astro.props;
+// Fixed positions keep the static render predictable. Leave the hero text clear.
+const particles = Array.from({ length: variant === 'hero' ? 32 : 20 }, (_, index) => {
+  let x = 3 + ((index * 37) % 94);
+  const y = 4 + ((index * 29) % 91);
+  if (variant === 'content' || (x > 22 && x < 78 && y > 26 && y < 76)) {
+    x = index % 2 === 0 ? 3 + (index % 5) * 2 : 97 - (index % 5) * 2;
+  }
+  return { x, y, size: 1.5 + (index % 3) * 0.65, opacity: 0.25 + (index % 4) * 0.1, duration: 15 + (index % 6) * 3, delay: -(index * 1.7), drift: index % 2 === 0 ? 12 : -12 };
+});
+---
+
+<div aria-hidden="true" data-particles={variant} class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+  {particles.map(({ x, y, size, opacity, duration, delay, drift }, index) => (
+    <span
+      class:list={['absolute rounded-full bg-accent opacity-[var(--particle-opacity)] shadow-[0_0_8px_#a6c9f044] motion-safe:animate-particle motion-safe:[animation-duration:var(--particle-duration)] motion-safe:[animation-delay:var(--particle-delay)]', index > 15 && 'hidden sm:block']}
+      style={`left:${x}%;top:${y}%;width:${size}px;height:${size}px;--particle-opacity:${opacity};--particle-duration:${duration}s;--particle-delay:${delay}s;--particle-drift:${drift}px;`}
+    ></span>
+  ))}
+</div>
